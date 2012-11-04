@@ -18,7 +18,7 @@
 #include <iostream>
 #include <functional>
 #include "for_each.hpp"
-#include "unpack_tuple.hpp"
+#include "unpack.hpp"
 
 
 
@@ -37,7 +37,6 @@ struct Beer{
     
     void doSomething() const { std::cout <<"Beer" << std::endl; }
 };
-
 
 
 // ---------- FUNCTOR ----------
@@ -61,20 +60,19 @@ int two(int i)
 }
 
 
-
 int main()
 {
     
     // iterate through the tuple elements. 
     std::tuple<Foo, Bar, Beer>  foobarbeer = std::make_tuple(Foo(), Bar(), Beer());
-    code11::for_each(foobarbeer, Functor() );
+    tuple11::for_each(foobarbeer, Functor() );
 
     
     // unpack tuple and apply to the function
     std::tuple<int, double> tup(23, 4.5);
-    code11::apply(one, tup);
+    tuple11::apply(one, tup);
 
-    int d = code11::apply(two, std::make_tuple(2));    
+    int d = tuple11::apply(two, std::make_tuple(2));    
 
 
 

@@ -25,7 +25,7 @@ using std::tuple;
 using std::forward;
 using std::get;
 
-namespace code11 {
+namespace tuple11 {
     namespace details {
 
         template<class Ret, class... Args, int... Indexes > 

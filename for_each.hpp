@@ -23,7 +23,7 @@
 #include "details/make_indexes.hpp"
 
 
-namespace code11 {
+namespace tuple11 {
     namespace details {
     
         template<typename Func, typename Last>
