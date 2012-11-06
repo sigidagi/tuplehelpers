@@ -25,16 +25,27 @@ namespace tuple11 {
     namespace details {
         
         template<typename Tuple, std::size_t N, typename Action>
-        class tuple_action : public std::binary_function<Tuple, Tuple, bool>
+        class binary_function : public std::binary_function<Tuple, Tuple, typename Action::result_type>
         {
             public:
-                bool operator()(const Tuple& first, const Tuple& second) const {
+                typename Action::result_type operator()(const Tuple& first, const Tuple& second) const {
                     return action_( std::get<N>(first), std::get<N>(second) );
                 }
             private:
                 Action action_ = Action{};
         };
         
+        template<typename Tuple, std::size_t N, typename Action>
+        class unary_function : public std::unary_function<Tuple, typename Action::result_type>
+        {
+            public:
+                typename Action::result_type operator()(const Tuple& tup) const {
+                    return action_( std::get<N>(tup) );
+                }
+            private:
+                Action action_ = Action{};
+        };
+
 
     }// namespace details
 

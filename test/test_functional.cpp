@@ -22,7 +22,8 @@
 #include "functional.hpp"
 #include "print.hpp"
 
-using tuple11::compare;
+using std::placeholders::_1;
+using std::placeholders::_2;
 
 // Student type which contain name, id and average grade.
 // CSV file or database can contain such collection of students
@@ -42,14 +43,23 @@ enum StudentIndex
 int main()
 {
     std::vector<Student> students;
-    students.push_back( std::make_tuple("Jon", 1, 8.4) );
-    students.push_back( std::make_tuple("Ben", 2, 9.6) );
-    students.push_back( std::make_tuple("Dick", 3, 7.3) );
-    students.push_back( std::make_tuple("Sen", 4, 8.2) );
-
-    auto it = std::max_element(students.begin(), students.end(), compare<Student, STUDENT_GRADE>()); 
-    tuple11::print(*it);    
+    students.push_back( std::make_tuple("Jon", 1, 8.4f) );
+    students.push_back( std::make_tuple("Ben", 2, 9.6f) );
+    students.push_back( std::make_tuple("Dick", 3, 7.3f) );
+    students.push_back( std::make_tuple("Sen", 4, 8.2f) );
     
+    Student stud2 = std::make_tuple("Tita", 8, 5.6f); 
+
+    auto it = std::max_element(students.begin(), students.end(), tuple11::compare<Student, STUDENT_GRADE>()); 
+    std::cout << "Student with best grade: ";
+    tuple11::print(*it);    
+   
+    std::vector<float> sum(students.size());
+    std::transform(students.begin(), students.end(), sum.begin(), std::bind(tuple11::plus<Student, STUDENT_GRADE>(), _1, stud2));
+    //std::transform(students.begin(), students.end(), sum.begin(), [](const Student& first){ return std::get<STUDENT_GRADE>(first); } );
+    
+
+    std::cout << "Student average: " << sum[0] << std::endl; 
     
 
     return 0;
