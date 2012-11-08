@@ -29,8 +29,8 @@ int main()
     std::tuple<int, double> tup(23, 4.5);
 
     // unpack tuple and apply to the function
-    code11::apply(one, tup);
-    int d = code11::apply(two, std::make_tuple(2));    
+    tuple11::apply(one, tup);
+    int d = tuple11::apply(two, std::make_tuple(2));    
 
     return 0;
 }
@@ -70,7 +70,7 @@ int main()
     // iterate through the tuple elements. 
     std::tuple<Foo, Bar, Beer>  foobarbeer = std::make_tuple(Foo(), Bar(), Beer());
 
-    code11::for_each(foobarbeer, Functor() );
+    tuple11::for_each(foobarbeer, Functor() );
 
     return 0;
 }

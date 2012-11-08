@@ -63,7 +63,7 @@ namespace tuple11 {
                        std::forward<std::tuple<Args...>>(tup) );
     }
 
-} // namespace code11
+} // namespace tuple11
 
 
 #endif

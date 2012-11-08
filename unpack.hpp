@@ -34,7 +34,7 @@ namespace tuple11 {
             return pf( forward<Args>( get<Indexes>(tup))... ); 
         } 
 
-    } // namespace code11
+    } // namespace tuple11
 
 
     template<class Ret, class ... Args> 
@@ -49,7 +49,7 @@ namespace tuple11 {
         return details::apply_helper(pf, typename details::make_indexes<Args...>::type(), forward<tuple<Args...>>(tup));
     }
 
-} // namespace code11
+} // namespace tuple11
 
 
 #endif
