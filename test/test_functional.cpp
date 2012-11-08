@@ -18,19 +18,12 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 
 #include "functional.hpp"
 #include "print.hpp"
 
-using std::placeholders::_1;
-using std::placeholders::_2;
-
-// Student type which contain name, id and average grade.
-// CSV file or database can contain such collection of students
-// Loaded and parsed data can be hold in vector container.
-//  
-// Task 
-//
+// --- Student type containing name, id and grade ----
 using Student = std::tuple<std::string, int, float>;
 enum StudentIndex 
 {
@@ -47,20 +40,22 @@ int main()
     students.push_back( std::make_tuple("Ben", 2, 9.6f) );
     students.push_back( std::make_tuple("Dick", 3, 7.3f) );
     students.push_back( std::make_tuple("Sen", 4, 8.2f) );
+    students.push_back( std::make_tuple("Pen", 5, 7.8f) );
     
-    Student stud2 = std::make_tuple("Tita", 8, 5.6f); 
-
-    auto it = std::max_element(students.begin(), students.end(), tuple11::compare<Student, STUDENT_GRADE>()); 
+    // find studend with a best grade.
+    auto it = std::max_element(students.begin(), students.end(), tuple11::less<STUDENT_GRADE, Student>()); 
     std::cout << "Student with best grade: ";
     tuple11::print(*it);    
    
-    std::vector<float> sum(students.size());
-    std::transform(students.begin(), students.end(), sum.begin(), std::bind(tuple11::plus<Student, STUDENT_GRADE>(), _1, stud2));
-    //std::transform(students.begin(), students.end(), sum.begin(), [](const Student& first){ return std::get<STUDENT_GRADE>(first); } );
-    
+    // extract 'comlumn' grades and save into vector. 
+    auto grades = tuple11::extract<STUDENT_GRADE>(students);
+    // 
+    float sum = std::accumulate(grades.begin(), grades.end(), 0.0f, std::plus<float>());
 
-    std::cout << "Student average: " << sum[0] << std::endl; 
-    
+    // average of students grades.
+    std::cout << "Average grade: " << sum/grades.size() << std::endl;
+
+
 
     return 0;
 }
