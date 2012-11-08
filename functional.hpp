@@ -30,13 +30,13 @@ namespace tuple11 {
 
     // ------------ unary functors-----------
     template<std::size_t N, typename Tuple>
-    class negate : public details::unary_function<Tuple, N, std::negate<typename std::tuple_element<N, Tuple>::type>>{};
+    class negate : public details::unary_function<Tuple, N, std::negate<Element<N, Tuple>>> {};
 
     template< std::size_t N, typename Tuple>
-    class take : std::unary_function<Tuple, typename std::tuple_element<N, Tuple>::type> 
+    class take : std::unary_function<Tuple, Element<N, Tuple>> 
     {
         public:
-            typename std::tuple_element<N, Tuple>::type operator()(const Tuple& tup) const {
+            Element<N, Tuple> operator()(const Tuple& tup) const {
                 return std::get<N>(tup);
             }
     };
@@ -44,19 +44,19 @@ namespace tuple11 {
 
     // ------------- binary functors ---------- 
     template<std::size_t N, typename Tuple>
-    class less : public details::binary_function<Tuple, N, std::less<typename std::tuple_element<N, Tuple>::type>> {};
+    class less : public details::binary_function<Tuple, N, std::less<Element<N, Tuple>>> {};
  
     template<std::size_t N, typename Tuple>
-    class equal : public details::binary_function<Tuple, N, std::equal_to<typename std::tuple_element<N, Tuple>::type>> {};
+    class equal : public details::binary_function<Tuple, N, std::equal_to<Element<N, Tuple>>> {};
 
     template<std::size_t N, typename Tuple>
-    class plus : public details::binary_function<Tuple, N, std::plus<typename std::tuple_element<N, Tuple>::type>> {};
+    class plus : public details::binary_function<Tuple, N, std::plus<Element<N, Tuple>>> {};
    
     template<std::size_t N, typename Tuple>
-    class minus : public details::binary_function<Tuple, N, std::minus<typename std::tuple_element<N, Tuple>::type>> {};
+    class minus : public details::binary_function<Tuple, N, std::minus<Element<N, Tuple>>> {};
 
     template<std::size_t N, typename Tuple>
-    class multiplies : public details::binary_function<Tuple, N, std::multiplies<typename std::tuple_element<N, Tuple>::type>> {};
+    class multiplies : public details::binary_function<Tuple, N, std::multiplies<Element<N, Tuple>>> {};
 
 
 
@@ -69,7 +69,6 @@ namespace tuple11 {
         return std::move(out);
     }
     
-
         
 } // namespace code11
 
