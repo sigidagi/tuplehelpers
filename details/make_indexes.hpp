@@ -21,9 +21,10 @@
 
 namespace tuple11 {
     namespace details {
-
+        
         template<int...> struct index_tuple{}; 
-
+        
+        // ----- first method ----
         template<int I, typename IndexTuple, typename... Types> 
         struct make_indexes_impl; 
 
@@ -42,6 +43,21 @@ namespace tuple11 {
         template<typename ... Types> 
         struct make_indexes : make_indexes_impl<0, index_tuple<>, Types...> 
         {};
+
+        
+        // ---- another method to generate sequence/indexes from tuple arguments.
+        template<int N, int... Indexes>
+        struct make_indexes2 : make_indexes2<N-1, N-1, Indexes...> {};
+        
+        // template specialization - termination condition
+        template<int... Indexes>
+        struct make_indexes2<0, Indexes...> 
+        {
+          typedef index_tuple<Indexes...> type;
+        };
+
+
+
 
     } // namspace details
 } // namespace tuple11

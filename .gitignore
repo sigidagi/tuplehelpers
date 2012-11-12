@@ -1,1 +1,11 @@
-test/a.out
+build/CMakeCache.txt
+build/CMakeFiles
+build/CMakeFiles/**/*
+build/Makefile
+build/cmake_install.cmake
+build/test_fibonacii
+build/test_foreach
+build/test_functional
+build/test_zip
+*.swp
+

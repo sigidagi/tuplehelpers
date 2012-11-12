@@ -66,7 +66,7 @@ namespace tuple11 {
     {
         std::vector<Element<N, Tuple>> out(tup.size());
         std::transform(tup.begin(), tup.end(), out.begin(), take<N, Tuple>());
-        return std::move(out);
+        return out;
     }
     
         

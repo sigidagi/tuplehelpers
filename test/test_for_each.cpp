@@ -73,7 +73,7 @@ int main()
     tuple11::apply(one, tup);
 
     int d = tuple11::apply(two, std::make_tuple(2));    
-
+    (void)d; // just to supress warninig - unused-variable.
 
 
     return 0;

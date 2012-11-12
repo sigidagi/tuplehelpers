@@ -45,7 +45,7 @@ int main()
     // find studend with a best grade.
     auto it = std::max_element(students.begin(), students.end(), tuple11::less<STUDENT_GRADE, Student>()); 
     std::cout << "Student with best grade: ";
-    tuple11::print(*it);    
+    tuple11::print_tuple(*it);    
    
     // extract 'comlumn' grades and save into vector. 
     auto grades = tuple11::extract<STUDENT_GRADE>(students);
